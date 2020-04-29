@@ -4,13 +4,14 @@ using namespace std;
 
 class Coverage
 {
-protected: 
+public: 
 	string type;
-	string* range;
+	string range;
 	string contractor;
 	string orderer;
 
 public:
-	Coverage(string type, string* range, string contractor, string orderer);
+	Coverage();
+	Coverage(string type, string range, string contractor, string orderer);
 };
 

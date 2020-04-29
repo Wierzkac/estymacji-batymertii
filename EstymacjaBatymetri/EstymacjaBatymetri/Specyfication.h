@@ -4,7 +4,7 @@ using namespace std;
 
 class Specyfication
 {
-protected: 
+public: 
 	string saveFormat;
 	double surfaceCoverage; // [ km² ]
 public:

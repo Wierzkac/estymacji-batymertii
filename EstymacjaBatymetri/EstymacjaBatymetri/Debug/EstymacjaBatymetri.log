@@ -1,11 +1,2 @@
-﻿  Coverage.cpp
-  Date.cpp
-  EstymacjaBatymetri.cpp
-  GRIDSpecyfication.cpp
-  LIDARSpecyfication.cpp
-  MonitioringInfo.cpp
-  OrthophotomapSpecyfication.cpp
-  Specyfication.cpp
-  TimeRange.cpp
-  Generating Code...
+﻿  EstymacjaBatymetri.cpp
   EstymacjaBatymetri.vcxproj -> D:\STUDIA\MAGISTERKA\SEM1\TMC\projekt\estymacji-batymertii\EstymacjaBatymetri\Debug\EstymacjaBatymetri.exe

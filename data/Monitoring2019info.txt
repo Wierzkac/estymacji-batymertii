@@ -1,0 +1,22 @@
+﻿Rodzaj opracowania:Monitoring brzegów morskich
+Zakres opracowania:Wybrzeże (Stilo-Władysławowo) | Półwysep Helski | Zatoka Gdańska | Mierzeja Wiślana | Zalew Wiślany
+Wykonawca opracowania:OPEGIEKA Sp. z o.o.
+Zamawiający:Urząd Morski w Gdyni
+Data nalotu:2019/02/16-2019/02/27
+Układ współrzędnych płaskich:PL-1992
+Układ wysokościowy:PL-EVRF2007-NH
+Specyfikacja ortofotomapy:
+  Błąd średni położenia punktu (XY):0.20 m
+  Rozdzielczość piksela:0.15 m
+  Format zapisu:GEOTIFF
+  Powierzchnia opracowania:334 km²
+Specyfikacja NMT i NMPT (LIDAR):
+  Średnia gęstość skanowania:13 pkt/m²
+  Błąd średni położenia punktu (XY):0.20 m
+  Błąd średni rzędnej punktu (H):0.10 m
+  Format zapisu:LAS
+  Powierzchnia opracowania:334 km²
+Specyfikacja NMT i NMPT (GRID):
+  Rozdzielczość piksela:0.5 m
+  Format zapisu:GEOTIFF
+  Powierzchnia opracowania:334 km²

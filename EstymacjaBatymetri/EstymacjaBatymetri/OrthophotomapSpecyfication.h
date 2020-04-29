@@ -3,10 +3,11 @@
 
 class OrthophotomapSpecyfication : public Specyfication
 {
-protected: 
+public: 
 	float slipXY; // average mistake P(X,Y) location [ m ]
 	double pxResolution; // [ m ]
 public:
+	OrthophotomapSpecyfication();
 	OrthophotomapSpecyfication(float slipXY,double pxResolution, string saveFormat,double surfaceCoverage);
 };
 

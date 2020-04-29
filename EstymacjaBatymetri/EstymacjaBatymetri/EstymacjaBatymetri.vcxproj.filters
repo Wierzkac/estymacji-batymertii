@@ -24,9 +24,6 @@
     <ClCompile Include="FileReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MonitioringInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GRIDSpecyfication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,12 +45,12 @@
     <ClCompile Include="OrthophotomapSpecyfication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MonitoringInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MonitioringInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GRIDSpecyfication.h">
@@ -75,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OrthophotomapSpecyfication.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MonitoringInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

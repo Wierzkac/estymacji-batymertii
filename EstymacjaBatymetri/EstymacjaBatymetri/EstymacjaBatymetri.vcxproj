@@ -157,7 +157,7 @@
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="GRIDSpecyfication.cpp" />
     <ClCompile Include="LIDARSpecyfication.cpp" />
-    <ClCompile Include="MonitioringInfo.cpp" />
+    <ClCompile Include="MonitoringInfo.cpp" />
     <ClCompile Include="OrthophotomapSpecyfication.cpp" />
     <ClCompile Include="Specyfication.cpp" />
     <ClCompile Include="TimeRange.cpp" />
@@ -168,7 +168,7 @@
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="GRIDSpecyfication.h" />
     <ClInclude Include="LIDARSpecyfication.h" />
-    <ClInclude Include="MonitioringInfo.h" />
+    <ClInclude Include="MonitoringInfo.h" />
     <ClInclude Include="OrthophotomapSpecyfication.h" />
     <ClInclude Include="Specyfication.h" />
     <ClInclude Include="TimeRange.h" />

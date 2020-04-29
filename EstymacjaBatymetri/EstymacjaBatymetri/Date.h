@@ -1,7 +1,7 @@
 #pragma once
 class Date
 {
-protected:
+public:
 	int year;
 	int month;
 	int day;

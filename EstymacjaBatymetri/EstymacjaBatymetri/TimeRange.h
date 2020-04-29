@@ -3,11 +3,12 @@
 
 class TimeRange
 {
-protected:
-	Date begining;
-	Date end;
+public:
+	Date* begining;
+	Date* end;
 
 public:
-	TimeRange(Date begining, Date end);
+	TimeRange();
+	TimeRange(Date* begining, Date* end);
 };
 
