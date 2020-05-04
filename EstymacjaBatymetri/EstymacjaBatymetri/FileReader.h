@@ -1,5 +1,7 @@
 #pragma once
 #include "MonitoringInfo.h"
+#include "LidarFile.h"
+#include <string>
 #include <fstream>
 #include <iostream>
 using namespace std;
@@ -8,16 +10,18 @@ class FileReader
 {
 protected:
 	const char* filePath;
-	ifstream  txtFile;
+	ifstream  txtFile, binFile;
 
 private :
-	void openFile();
+	void openTxtFile();
+	void openBinFile();
 
 public:
 	FileReader(const char* pathToFile);
 	void printPath();
 	void printFile();
 	MonitoringInfo* readMonitoringInfo();
+	LidarFile*  readLidarFile();
 
 private:
 	TimeRange* readDateValues(string& line);

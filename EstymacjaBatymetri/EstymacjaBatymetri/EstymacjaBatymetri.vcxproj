@@ -156,6 +156,7 @@
     <ClCompile Include="EstymacjaBatymetri.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="GRIDSpecyfication.cpp" />
+    <ClCompile Include="LidarFile.cpp" />
     <ClCompile Include="LIDARSpecyfication.cpp" />
     <ClCompile Include="MonitoringInfo.cpp" />
     <ClCompile Include="OrthophotomapSpecyfication.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Date.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="GRIDSpecyfication.h" />
+    <ClInclude Include="LidarFile.h" />
     <ClInclude Include="LIDARSpecyfication.h" />
     <ClInclude Include="MonitoringInfo.h" />
     <ClInclude Include="OrthophotomapSpecyfication.h" />

@@ -1,2 +1,13 @@
 ﻿  EstymacjaBatymetri.cpp
+D:\STUDIA\MAGISTERKA\SEM1\TMC\projekt\estymacji-batymertii\EstymacjaBatymetri\EstymacjaBatymetri\FileReader.h(3,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+D:\STUDIA\MAGISTERKA\SEM1\TMC\projekt\estymacji-batymertii\EstymacjaBatymetri\EstymacjaBatymetri\EstymacjaBatymetri.cpp(4,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+  FileReader.cpp
+D:\STUDIA\MAGISTERKA\SEM1\TMC\projekt\estymacji-batymertii\EstymacjaBatymetri\EstymacjaBatymetri\FileReader.h(3,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+D:\STUDIA\MAGISTERKA\SEM1\TMC\projekt\estymacji-batymertii\EstymacjaBatymetri\EstymacjaBatymetri\FileReader.cpp(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+D:\STUDIA\MAGISTERKA\SEM1\TMC\projekt\estymacji-batymertii\EstymacjaBatymetri\EstymacjaBatymetri\FileReader.cpp(181,21): warning C4244: '=': conversion from 'double' to 'uint32_t', possible loss of data
+D:\STUDIA\MAGISTERKA\SEM1\TMC\projekt\estymacji-batymertii\EstymacjaBatymetri\EstymacjaBatymetri\FileReader.cpp(182,21): warning C4244: '=': conversion from 'double' to 'uint32_t', possible loss of data
+D:\STUDIA\MAGISTERKA\SEM1\TMC\projekt\estymacji-batymertii\EstymacjaBatymetri\EstymacjaBatymetri\FileReader.cpp(183,21): warning C4244: '=': conversion from 'double' to 'uint32_t', possible loss of data
+  LidarFile.cpp
+D:\STUDIA\MAGISTERKA\SEM1\TMC\projekt\estymacji-batymertii\EstymacjaBatymetri\EstymacjaBatymetri\LidarFile.cpp(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+  Generating Code...
   EstymacjaBatymetri.vcxproj -> D:\STUDIA\MAGISTERKA\SEM1\TMC\projekt\estymacji-batymertii\EstymacjaBatymetri\Debug\EstymacjaBatymetri.exe

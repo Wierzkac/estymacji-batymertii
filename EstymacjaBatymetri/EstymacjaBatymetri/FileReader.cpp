@@ -1,5 +1,6 @@
 #include "FileReader.h"
-#include <string>
+#include <cassert>
+
 FileReader::FileReader(const char* pathToFile)
 {
 	this->filePath = pathToFile;
@@ -9,14 +10,16 @@ void FileReader::printPath() {
 	cout << "path: " << this->filePath;
 }
 
-void FileReader::openFile() {
+void FileReader::openTxtFile() {
 	txtFile = ifstream(this->filePath);
-	//if (txtFile == NULL)
-		
+}
+
+void FileReader::openBinFile() {
+	binFile = ifstream(this->filePath, ios::binary);
 }
 
 void FileReader::printFile() {
-	openFile();
+	openTxtFile();
 	int dotsIndex = 0;
 	for (string line; getline(txtFile, line); )
 	{
@@ -139,7 +142,7 @@ void FileReader::readInfoLine(int lineNumber, string& value,MonitoringInfo* info
 }
 
 MonitoringInfo* FileReader::readMonitoringInfo() {
-	openFile();
+	openTxtFile();
 	MonitoringInfo *info=new MonitoringInfo();
 	int dotsIndex = 0;
 	string line,value;
@@ -154,4 +157,32 @@ MonitoringInfo* FileReader::readMonitoringInfo() {
 		}
 	}
 	return info;
+}
+
+LidarFile* FileReader::readLidarFile()
+{
+	openBinFile();
+	LidarFile* lidarFile=new LidarFile();
+	binFile.read((char*)&lidarFile->header, sizeof(lidarFile->header));
+
+	assert(lidarFile->header.versionMaj == 1 && lidarFile->header.versionMin == 2);
+	assert(lidarFile->header.headerSize == sizeof(lidarFile->header));
+	assert(lidarFile->header.pointDataRecordFormat == 3);
+
+	binFile.seekg(lidarFile->header.pointDataOffset);
+	for (uint32_t i = 0; i < lidarFile->header.numberOfPoints; i++)
+	{
+		LidarPointRecord3 point; 
+		binFile.read((char*)&point, sizeof(LidarPointRecord3));
+		point.x = point.x * lidarFile->header.scaleX;
+		point.y = point.y * lidarFile->header.scaleY;
+		point.z = point.z * lidarFile->header.scaleZ;
+		
+		lidarFile->verts.push_back(point);
+	}
+
+	if (!binFile.good())
+		throw runtime_error("Error");
+
+	return lidarFile;
 }
