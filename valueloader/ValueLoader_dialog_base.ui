@@ -150,6 +150,29 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="currentIndex">
+         <number>3</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>field_1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>field_2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>field_3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>field_4</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>
@@ -188,6 +211,29 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="currentIndex">
+         <number>2</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>field_1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>field_2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>field_3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>field_4</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>
@@ -219,7 +265,31 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBoxZField"/>
+       <widget class="QComboBox" name="comboBoxZField">
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>field_1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>field_2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>field_3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>field_4</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item>
        <widget class="QLabel" name="labelNameZ">
@@ -250,7 +320,28 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBoxMField"/>
+       <widget class="QComboBox" name="comboBoxMField">
+        <item>
+         <property name="text">
+          <string>field_1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>field_2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>field_3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>field_4</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item>
        <widget class="QLabel" name="labelNameM">
