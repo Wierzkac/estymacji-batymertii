@@ -38,6 +38,7 @@ import os.path
 
 class ValueLoader:
     """QGIS Plugin Implementation."""
+    fileNames = []
 
     def __init__(self, iface):
         """Constructor.
@@ -192,7 +193,7 @@ class ValueLoader:
         if self.first_start == True:
             self.first_start = False
             self.dlg = ValueLoaderDialog()
-            self.dlg.loadFilesButton.clicked.connect(self.select_output_file) # function to loading files
+            self.dlg.buttonFileChooser.clicked.connect(self.select_output_file) # function to loading files
             self.dlg.button_box.button(QtWidgets.QDialogButtonBox.Apply).clicked.connect(self.addLayer)
 
         # show the dialog
@@ -206,16 +207,15 @@ class ValueLoader:
             pass
 
     def select_output_file(self):
-        filenames, _filter = QFileDialog.getOpenFileNames(self.dlg, "Select files containing values","E:\studia\semestr21\TMC\Projekt\Monitoring2019-Profile", '*.txt')
+        fileNames, _filter = QFileDialog.getOpenFileNames(self.dlg, "Select files containing values","E:\studia\semestr21\TMC\Projekt\Monitoring2019-Profile", '*.txt')
 
         model = QtGui.QStandardItemModel()
-        self.dlg.listView.setModel(model)
-        for filename in filenames:
+        self.dlg.listViewFileNames.setModel(model)
+        for filename in fileNames:
             item = QtGui.QStandardItem(os.path.basename(filename))
             model.appendRow(item)
             
     def addLayer(self):
-        name = str(self.dlg.lineEdit.text())
-        print(name)
+        name = str(self.dlg.inputLayerName.text())
         layer = QgsVectorLayer("tmp.shp", name, "ogr")
         QgsProject.instance().addMapLayer(layer)
