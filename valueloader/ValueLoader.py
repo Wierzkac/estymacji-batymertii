@@ -21,15 +21,19 @@
  *                                                                         *
  ***************************************************************************/
 """
+from qgis.core import QgsProject, QgsVectorLayer
+from qgis.PyQt import QtGui, QtWidgets
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
-from qgis.PyQt.QtWidgets import QAction
+from qgis.PyQt.QtWidgets import QAction, QFileDialog
+import os
 
 # Initialize Qt resources from file resources.py
 from .resources import *
 # Import the code for the dialog
 from .ValueLoader_dialog import ValueLoaderDialog
 import os.path
+
 
 
 class ValueLoader:
@@ -188,6 +192,8 @@ class ValueLoader:
         if self.first_start == True:
             self.first_start = False
             self.dlg = ValueLoaderDialog()
+            self.dlg.loadFilesButton.clicked.connect(self.select_output_file) # function to loading files
+            self.dlg.button_box.button(QtWidgets.QDialogButtonBox.Apply).clicked.connect(self.addLayer)
 
         # show the dialog
         self.dlg.show()
@@ -198,3 +204,18 @@ class ValueLoader:
             # Do something useful here - delete the line containing pass and
             # substitute with your code.
             pass
+
+    def select_output_file(self):
+        filenames, _filter = QFileDialog.getOpenFileNames(self.dlg, "Select files containing values","E:\studia\semestr21\TMC\Projekt\Monitoring2019-Profile", '*.txt')
+
+        model = QtGui.QStandardItemModel()
+        self.dlg.listView.setModel(model)
+        for filename in filenames:
+            item = QtGui.QStandardItem(os.path.basename(filename))
+            model.appendRow(item)
+            
+    def addLayer(self):
+        name = str(self.dlg.lineEdit.text())
+        print(name)
+        layer = QgsVectorLayer("tmp.shp", name, "ogr")
+        QgsProject.instance().addMapLayer(layer)
