@@ -21,12 +21,13 @@
  *                                                                         *
  ***************************************************************************/
 """
-from qgis.core import QgsProject, QgsVectorLayer
+from qgis.core import QgsProject, QgsVectorLayer, QgsCoordinateReferenceSystem
 from qgis.PyQt import QtGui, QtWidgets
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QFileDialog
 import os
+import shapefile
 
 # Initialize Qt resources from file resources.py
 from .resources import *
@@ -39,6 +40,7 @@ import os.path
 class ValueLoader:
     """QGIS Plugin Implementation."""
     fileNames = []
+    pointsList = []
 
     def __init__(self, iface):
         """Constructor.
@@ -207,15 +209,64 @@ class ValueLoader:
             pass
 
     def select_output_file(self):
-        fileNames, _filter = QFileDialog.getOpenFileNames(self.dlg, "Select files containing values","E:\studia\semestr21\TMC\Projekt\Monitoring2019-Profile", '*.txt')
+        self.fileNames, _filter = QFileDialog.getOpenFileNames(self.dlg, "Select files containing values","E:\studia\semestr21\TMC\Projekt\Monitoring2019-Profile", '*.txt')
 
         model = QtGui.QStandardItemModel()
         self.dlg.listViewFileNames.setModel(model)
-        for filename in fileNames:
+        for filename in self.fileNames:
             item = QtGui.QStandardItem(os.path.basename(filename))
             model.appendRow(item)
             
     def addLayer(self):
+        self.getAllPointsFromFiles()
+        self.createShapeFile()
+
         name = str(self.dlg.inputLayerName.text())
         layer = QgsVectorLayer("tmp.shp", name, "ogr")
         QgsProject.instance().addMapLayer(layer)
+        QgsProject.instance().setCrs(QgsCoordinateReferenceSystem(2180))
+
+    def getAllPointsFromFiles(self):
+        self.pointsList.clear()
+        print (self.fileNames)
+        for filePath in self.fileNames:
+            with open(filePath) as f:
+                for _ in range(3):
+                    next(f)
+                print(f)
+                for line in f:
+                    fields = line.split("\t")
+                    if len(fields) == 4:
+                        point = Point()
+                        point.distance = float(fields[0])
+                        point.depth = float(fields[1])
+                        point.x = float(fields[3])
+                        point.y = float(fields[2])
+                        self.pointsList.append(point)
+
+    def createShapeFile(self):
+        w = shapefile.Writer('tmp.shp', shapeType=1) 
+        #self.dlg.comboBoxXField.currendText()
+        w.field(self.dlg.lineEditMName.text(), 'N', decimal=2)
+        w.field(self.dlg.lineEditZName.text(), 'N', decimal=2)
+        w.field(self.dlg.lineEditYName.text(), 'N', decimal=2)
+        w.field(self.dlg.lineEditXName.text(), 'N', decimal=2)
+
+        for point in self.pointsList:
+            w.point(point.x, point.y)
+            w.record(point.distance, point.depth, point.y, point.x)
+        w.close()
+
+
+class Point:
+
+    def __init__(self, distance,depth,x,y):
+        self.distance = distance
+        self.depth = depth
+        self.x = x
+        self.y = y
+    def __init__(self):
+        self.distance = 0
+        self.depth = 0
+        self.x = 0
+        self.y = 0
