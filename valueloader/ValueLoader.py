@@ -25,7 +25,7 @@ from qgis.core import QgsProject, QgsVectorLayer, QgsCoordinateReferenceSystem
 from qgis.PyQt import QtGui, QtWidgets
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
-from qgis.PyQt.QtWidgets import QAction, QFileDialog
+from qgis.PyQt.QtWidgets import QAction, QFileDialog, QLineEdit
 import os
 import shapefile
 
@@ -221,7 +221,7 @@ class ValueLoader:
         self.getAllPointsFromFiles()
         self.createShapeFile()
 
-        name = str(self.dlg.inputLayerName.text())
+        name = str(self.getTextFromLineEdit("inputLayerName"))
         layer = QgsVectorLayer("tmp.shp", name, "ogr")
         QgsProject.instance().addMapLayer(layer)
         QgsProject.instance().setCrs(QgsCoordinateReferenceSystem(2180))
@@ -238,24 +238,31 @@ class ValueLoader:
                     fields = line.split("\t")
                     if len(fields) == 4:
                         point = Point()
-                        point.distance = float(fields[0])
-                        point.depth = float(fields[1])
-                        point.x = float(fields[3])
-                        point.y = float(fields[2])
+
+                        point.distance = float(fields[self.dlg.comboBoxMField.currentIndex()])
+                        point.depth = float(fields[self.dlg.comboBoxZField.currentIndex()])
+                        point.x = float(fields[self.dlg.comboBoxXField.currentIndex()])
+                        point.y = float(fields[self.dlg.comboBoxYField.currentIndex()])
                         self.pointsList.append(point)
 
     def createShapeFile(self):
-        w = shapefile.Writer('tmp.shp', shapeType=1) 
-        #self.dlg.comboBoxXField.currendText()
-        w.field(self.dlg.lineEditMName.text(), 'N', decimal=2)
-        w.field(self.dlg.lineEditZName.text(), 'N', decimal=2)
-        w.field(self.dlg.lineEditYName.text(), 'N', decimal=2)
-        w.field(self.dlg.lineEditXName.text(), 'N', decimal=2)
+        w = shapefile.Writer('tmp.shp', shapeType=1)
+        w.field(self.getTextFromLineEdit("lineEditMName"), 'N', decimal=2)
+        w.field(self.getTextFromLineEdit("lineEditZName"), 'N', decimal=2)
+        w.field(self.getTextFromLineEdit("lineEditYName"), 'N', decimal=2)
+        w.field(self.getTextFromLineEdit("lineEditXName"), 'N', decimal=2)
 
         for point in self.pointsList:
             w.point(point.x, point.y)
             w.record(point.distance, point.depth, point.y, point.x)
         w.close()
+
+    def getTextFromLineEdit(self, name):
+        line = self.dlg.findChild(QLineEdit, name)
+        if line.text() != "":
+            return line.text()
+        else:
+            return line.placeholderText()
 
 
 class Point:
