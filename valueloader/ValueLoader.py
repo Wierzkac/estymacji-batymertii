@@ -21,9 +21,13 @@
  *                                                                         *
  ***************************************************************************/
 """
+from qgis.core import QgsProject, QgsVectorLayer, QgsCoordinateReferenceSystem
+from qgis.PyQt import QtGui, QtWidgets
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
-from qgis.PyQt.QtWidgets import QAction
+from qgis.PyQt.QtWidgets import QAction, QFileDialog, QLineEdit
+import os
+import shapefile
 
 # Initialize Qt resources from file resources.py
 from .resources import *
@@ -32,8 +36,11 @@ from .ValueLoader_dialog import ValueLoaderDialog
 import os.path
 
 
+
 class ValueLoader:
     """QGIS Plugin Implementation."""
+    fileNames = []
+    pointsList = []
 
     def __init__(self, iface):
         """Constructor.
@@ -188,6 +195,8 @@ class ValueLoader:
         if self.first_start == True:
             self.first_start = False
             self.dlg = ValueLoaderDialog()
+            self.dlg.buttonFileChooser.clicked.connect(self.select_output_file) # function to loading files
+            self.dlg.button_box.button(QtWidgets.QDialogButtonBox.Apply).clicked.connect(self.addLayer)
 
         # show the dialog
         self.dlg.show()
@@ -198,3 +207,73 @@ class ValueLoader:
             # Do something useful here - delete the line containing pass and
             # substitute with your code.
             pass
+
+    def select_output_file(self):
+        self.fileNames, _filter = QFileDialog.getOpenFileNames(self.dlg, "Select files containing values","E:\studia\semestr21\TMC\Projekt\Monitoring2019-Profile", '*.txt')
+
+        model = QtGui.QStandardItemModel()
+        self.dlg.listViewFileNames.setModel(model)
+        for filename in self.fileNames:
+            item = QtGui.QStandardItem(os.path.basename(filename))
+            model.appendRow(item)
+            
+    def addLayer(self):
+        self.getAllPointsFromFiles()
+        self.createShapeFile()
+
+        name = str(self.getTextFromLineEdit("inputLayerName"))
+        layer = QgsVectorLayer("tmp.shp", name, "ogr")
+        QgsProject.instance().addMapLayer(layer)
+        QgsProject.instance().setCrs(QgsCoordinateReferenceSystem(2180))
+
+    def getAllPointsFromFiles(self):
+        self.pointsList.clear()
+        print (self.fileNames)
+        for filePath in self.fileNames:
+            with open(filePath) as f:
+                for _ in range(3):
+                    next(f)
+                print(f)
+                for line in f:
+                    fields = line.split("\t")
+                    if len(fields) == 4:
+                        point = Point()
+
+                        point.distance = float(fields[self.dlg.comboBoxMField.currentIndex()])
+                        point.depth = float(fields[self.dlg.comboBoxZField.currentIndex()])
+                        point.x = float(fields[self.dlg.comboBoxXField.currentIndex()])
+                        point.y = float(fields[self.dlg.comboBoxYField.currentIndex()])
+                        self.pointsList.append(point)
+
+    def createShapeFile(self):
+        w = shapefile.Writer('tmp.shp', shapeType=1)
+        w.field(self.getTextFromLineEdit("lineEditMName"), 'N', decimal=2)
+        w.field(self.getTextFromLineEdit("lineEditZName"), 'N', decimal=2)
+        w.field(self.getTextFromLineEdit("lineEditYName"), 'N', decimal=2)
+        w.field(self.getTextFromLineEdit("lineEditXName"), 'N', decimal=2)
+
+        for point in self.pointsList:
+            w.point(point.x, point.y)
+            w.record(point.distance, point.depth, point.y, point.x)
+        w.close()
+
+    def getTextFromLineEdit(self, name):
+        line = self.dlg.findChild(QLineEdit, name)
+        if line.text() != "":
+            return line.text()
+        else:
+            return line.placeholderText()
+
+
+class Point:
+
+    def __init__(self, distance,depth,x,y):
+        self.distance = distance
+        self.depth = depth
+        self.x = x
+        self.y = y
+    def __init__(self):
+        self.distance = 0
+        self.depth = 0
+        self.x = 0
+        self.y = 0

@@ -92,6 +92,9 @@
      <height>20</height>
     </rect>
    </property>
+   <property name="placeholderText">
+    <string>Layer1</string>
+   </property>
   </widget>
   <widget class="QLabel" name="labelGeomatryDefinition">
    <property name="geometry">
@@ -190,6 +193,9 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="placeholderText">
+         <string>X</string>
+        </property>
        </widget>
       </item>
      </layout>
@@ -251,6 +257,9 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="placeholderText">
+         <string>Y</string>
+        </property>
        </widget>
       </item>
      </layout>
@@ -306,6 +315,9 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="placeholderText">
+         <string>Depth</string>
+        </property>
        </widget>
       </item>
      </layout>
@@ -357,6 +369,9 @@
           <width>149</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="placeholderText">
+         <string>Distance</string>
         </property>
        </widget>
       </item>
